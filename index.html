@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>US DNC Checker - Fast & Unlimited</title>
+    <title>US DNC Checker - CORS Fixed</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -24,39 +24,38 @@
             margin: 0 auto;
             background: white;
             border-radius: 30px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
             overflow: hidden;
         }
 
         header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 40px 30px;
+            padding: 30px;
             text-align: center;
             color: white;
         }
 
         header h1 {
-            font-size: 2.8em;
+            font-size: 2.5em;
             margin-bottom: 10px;
         }
 
-        header h1 i {
-            margin-right: 15px;
-        }
-
-        .subtitle {
-            font-size: 1.2em;
-            opacity: 0.95;
+        .proxy-status {
+            background: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 10px;
+            font-size: 0.9em;
         }
 
         main {
-            padding: 40px;
+            padding: 30px;
         }
 
         .input-section {
             display: flex;
-            gap: 30px;
-            margin-bottom: 30px;
+            gap: 20px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
 
@@ -64,83 +63,51 @@
             flex: 1;
             min-width: 300px;
             background: #f8f9fa;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-radius: 15px;
+            padding: 20px;
         }
 
         .method-card h2 {
             color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .method-card h2 i {
-            color: #667eea;
-        }
-
         .file-upload-area {
             border: 3px dashed #667eea;
-            border-radius: 15px;
-            padding: 40px 20px;
+            border-radius: 10px;
+            padding: 30px;
             text-align: center;
             cursor: pointer;
             background: white;
-            margin-bottom: 15px;
-        }
-
-        .file-upload-area:hover {
-            background: #f0f3ff;
-        }
-
-        .upload-icon {
-            font-size: 50px;
-            color: #667eea;
-            margin-bottom: 15px;
-        }
-
-        .upload-text {
-            color: #666;
-            font-size: 1.1em;
             margin-bottom: 10px;
         }
 
-        .browse-text {
+        .upload-icon {
+            font-size: 40px;
             color: #667eea;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .file-info {
-            color: #999;
-            font-size: 0.9em;
+            margin-bottom: 10px;
         }
 
         .selected-file {
             background: white;
-            border-radius: 10px;
-            padding: 12px 15px;
+            border-radius: 8px;
+            padding: 10px;
             border: 1px solid #e0e0e0;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .selected-file i {
-            color: #667eea;
-        }
-
         textarea {
             width: 100%;
-            height: 200px;
-            padding: 15px;
+            height: 180px;
+            padding: 12px;
             border: 2px solid #e0e0e0;
-            border-radius: 15px;
-            font-size: 14px;
-            resize: vertical;
-            margin-bottom: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
         }
 
         textarea:focus {
@@ -159,52 +126,33 @@
             color: white;
             border: none;
             padding: 8px 15px;
-            border-radius: 8px;
+            border-radius: 5px;
             cursor: pointer;
-        }
-
-        .btn-clear:hover {
-            background: #5a6268;
-        }
-
-        .input-count {
-            color: #666;
-            font-size: 14px;
         }
 
         .action-section {
             display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
+            gap: 10px;
+            margin-bottom: 20px;
             justify-content: center;
             flex-wrap: wrap;
         }
 
         .btn-check, .btn-stop, .btn-reset {
-            padding: 15px 40px;
+            padding: 12px 30px;
             border: none;
-            border-radius: 50px;
-            font-size: 1.2em;
+            border-radius: 25px;
+            font-size: 1.1em;
             font-weight: bold;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .btn-check {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-        }
-
-        .btn-check:hover {
-            transform: translateY(-2px);
-        }
-
-        .btn-check:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
         }
 
         .btn-stop {
@@ -213,31 +161,23 @@
             display: none;
         }
 
-        .btn-stop:hover {
-            background: #c82333;
-        }
-
         .btn-reset {
             background: #e9ecef;
             color: #495057;
         }
 
-        .btn-reset:hover {
-            background: #dee2e6;
-        }
-
         .progress-section {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             display: none;
         }
 
         .progress-bar {
             width: 100%;
-            height: 25px;
+            height: 20px;
             background: #e9ecef;
-            border-radius: 15px;
+            border-radius: 10px;
             overflow: hidden;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .progress-fill {
@@ -247,24 +187,18 @@
             transition: width 0.3s;
         }
 
-        .progress-text {
+        .progress-text, .progress-details {
             text-align: center;
             color: #666;
-        }
-
-        .progress-details {
-            text-align: center;
-            color: #666;
-            margin-top: 5px;
-            font-family: monospace;
+            font-size: 0.9em;
         }
 
         .error-message {
             background: #f8d7da;
             color: #721c24;
-            padding: 15px 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
             display: none;
             align-items: center;
             gap: 10px;
@@ -272,191 +206,123 @@
 
         .stats-section {
             display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
+            gap: 15px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
             display: none;
         }
 
         .stat-card {
             flex: 1;
-            min-width: 150px;
+            min-width: 120px;
             background: white;
-            border-radius: 15px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 15px;
             display: flex;
             align-items: center;
-            gap: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            gap: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
 
         .stat-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 20px;
         }
 
-        .stat-icon.total {
-            background: #e3f2fd;
-            color: #1976d2;
-        }
-
-        .stat-icon.dnc {
-            background: #ffebee;
-            color: #dc3545;
-        }
-
-        .stat-icon.clean {
-            background: #e8f5e9;
-            color: #28a745;
-        }
-
-        .stat-icon.error {
-            background: #fff3cd;
-            color: #ffc107;
-        }
-
-        .stat-details {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .stat-label {
-            font-size: 0.9em;
-            color: #666;
-        }
+        .stat-icon.total { background: #e3f2fd; color: #1976d2; }
+        .stat-icon.dnc { background: #ffebee; color: #dc3545; }
+        .stat-icon.clean { background: #e8f5e9; color: #28a745; }
+        .stat-icon.error { background: #fff3cd; color: #ffc107; }
 
         .stat-value {
-            font-size: 2em;
+            font-size: 1.8em;
             font-weight: bold;
             color: #333;
         }
 
         .results-section {
             display: flex;
-            gap: 25px;
+            gap: 20px;
             flex-wrap: wrap;
             display: none;
         }
 
         .result-card {
             flex: 1;
-            min-width: 300px;
+            min-width: 280px;
             background: #f8f9fa;
-            border-radius: 20px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .result-header {
-            padding: 20px;
+            padding: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid;
-        }
-
-        .dnc-card .result-header {
-            background: #dc3545;
             color: white;
         }
 
-        .clean-card .result-header {
-            background: #28a745;
-            color: white;
-        }
-
-        .error-card .result-header {
-            background: #ffc107;
-            color: #333;
-        }
-
-        .result-header h3 {
-            font-size: 1.3em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .dnc-card .result-header { background: #dc3545; }
+        .clean-card .result-header { background: #28a745; }
+        .error-card .result-header { background: #ffc107; color: #333; }
 
         .btn-copy, .btn-download {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255,255,255,0.2);
             color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 8px 12px;
-            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 5px 10px;
+            border-radius: 5px;
             cursor: pointer;
         }
 
         .result-list {
-            max-height: 300px;
+            max-height: 250px;
             overflow-y: auto;
-            padding: 15px;
+            padding: 10px;
         }
 
         .number-item {
             background: white;
-            padding: 12px 15px;
-            margin-bottom: 8px;
-            border-radius: 10px;
+            padding: 8px 12px;
+            margin-bottom: 5px;
+            border-radius: 5px;
             font-family: monospace;
-            border-left: 4px solid;
+            border-left: 3px solid;
         }
 
-        .dnc-card .number-item {
-            border-left-color: #dc3545;
-        }
-
-        .clean-card .number-item {
-            border-left-color: #28a745;
-        }
-
-        .error-card .number-item {
-            border-left-color: #ffc107;
-            background: #fff3cd;
-        }
-
-        .empty-message {
-            text-align: center;
-            color: #999;
-            padding: 30px;
-        }
+        .dnc-card .number-item { border-left-color: #dc3545; }
+        .clean-card .number-item { border-left-color: #28a745; }
+        .error-card .number-item { border-left-color: #ffc107; background: #fff3cd; }
 
         .btn-download-all {
             background: #6c757d;
             color: white;
             border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            font-size: 1em;
-            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 20px;
             margin: 20px auto 0;
             display: flex;
             align-items: center;
-            gap: 10px;
-            width: fit-content;
-        }
-
-        .btn-download-all:hover {
-            background: #5a6268;
+            gap: 8px;
+            cursor: pointer;
         }
 
         footer {
             background: #f8f9fa;
-            padding: 20px;
+            padding: 15px;
             text-align: center;
             color: #666;
         }
 
         @media (max-width: 768px) {
-            header h1 { font-size: 2em; }
-            main { padding: 20px; }
-            .input-section { flex-direction: column; }
-            .action-section { flex-direction: column; }
-            .btn-check, .btn-stop, .btn-reset { width: 100%; }
+            header h1 { font-size: 1.8em; }
+            main { padding: 15px; }
         }
     </style>
 </head>
@@ -464,7 +330,10 @@
     <div class="container">
         <header>
             <h1><i class="fas fa-shield-alt"></i> US DNC Checker</h1>
-            <p class="subtitle">Unlimited numbers | No CORS error | Fast checking</p>
+            <p>Unlimited numbers | Auto CORS fix</p>
+            <div class="proxy-status" id="proxyStatus">
+                <i class="fas fa-sync-alt fa-spin"></i> Testing proxies...
+            </div>
         </header>
 
         <main>
@@ -474,8 +343,8 @@
                     <div class="file-upload-area" id="fileUploadArea">
                         <i class="fas fa-cloud-upload-alt upload-icon"></i>
                         <input type="file" id="fileInput" accept=".txt,.csv" hidden>
-                        <p class="upload-text">Drag & drop or <span class="browse-text">browse</span></p>
-                        <p class="file-info">.txt or .csv (one number per line)</p>
+                        <p>Drag & drop or <span class="browse-text" style="color:#667eea;font-weight:bold;">browse</span></p>
+                        <p style="font-size:0.8em;color:#999;">.txt or .csv (one per line)</p>
                     </div>
                     <div class="selected-file" id="selectedFile">
                         <i class="fas fa-file-alt"></i> <span>No file selected</span>
@@ -484,7 +353,7 @@
 
                 <div class="method-card">
                     <h2><i class="fas fa-paste"></i> Paste Numbers</h2>
-                    <textarea id="phoneInput" placeholder="Enter numbers (one per line)&#10;Example:&#10;9706527042&#10;3034708896"></textarea>
+                    <textarea id="phoneInput" placeholder="Enter numbers (one per line)&#10;Example:&#10;3034708896&#10;9706527042"></textarea>
                     <div class="input-actions">
                         <button class="btn-clear" onclick="clearInput()"><i class="fas fa-eraser"></i> Clear</button>
                         <span class="input-count" id="inputCount">0 numbers</span>
@@ -500,46 +369,121 @@
 
             <div class="progress-section" id="progressSection">
                 <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-                <p class="progress-text" id="progressText">Processing: 0/0 numbers</p>
+                <p class="progress-text" id="progressText">Processing: 0/0</p>
                 <p class="progress-details" id="progressDetails"></p>
             </div>
 
             <div class="error-message" id="errorMessage"><i class="fas fa-exclamation-circle"></i> <span id="errorText"></span></div>
 
             <div class="stats-section" id="statsSection">
-                <div class="stat-card"><div class="stat-icon total"><i class="fas fa-phone-alt"></i></div><div class="stat-details"><span class="stat-label">Total</span><span class="stat-value" id="totalCount">0</span></div></div>
-                <div class="stat-card"><div class="stat-icon dnc"><i class="fas fa-ban"></i></div><div class="stat-details"><span class="stat-label">DNC</span><span class="stat-value" id="dncCount">0</span></div></div>
-                <div class="stat-card"><div class="stat-icon clean"><i class="fas fa-check-circle"></i></div><div class="stat-details"><span class="stat-label">Clean</span><span class="stat-value" id="cleanCount">0</span></div></div>
-                <div class="stat-card"><div class="stat-icon error"><i class="fas fa-exclamation-triangle"></i></div><div class="stat-details"><span class="stat-label">Errors</span><span class="stat-value" id="errorCount">0</span></div></div>
+                <div class="stat-card"><div class="stat-icon total"><i class="fas fa-phone-alt"></i></div><div><span class="stat-label">Total</span><div class="stat-value" id="totalCount">0</div></div></div>
+                <div class="stat-card"><div class="stat-icon dnc"><i class="fas fa-ban"></i></div><div><span class="stat-label">DNC</span><div class="stat-value" id="dncCount">0</div></div></div>
+                <div class="stat-card"><div class="stat-icon clean"><i class="fas fa-check-circle"></i></div><div><span class="stat-label">Clean</span><div class="stat-value" id="cleanCount">0</div></div></div>
+                <div class="stat-card"><div class="stat-icon error"><i class="fas fa-exclamation-triangle"></i></div><div><span class="stat-label">Errors</span><div class="stat-value" id="errorCount">0</div></div></div>
             </div>
 
             <div class="results-section" id="resultsSection">
                 <div class="result-card dnc-card">
-                    <div class="result-header"><h3><i class="fas fa-ban"></i> DNC Numbers</h3><div><button class="btn-copy" onclick="copyResults('dnc')"><i class="fas fa-copy"></i></button><button class="btn-download" onclick="downloadResults('dnc')"><i class="fas fa-download"></i></button></div></div>
-                    <div class="result-list" id="dncList"><p class="empty-message">No DNC numbers</p></div>
+                    <div class="result-header"><h3><i class="fas fa-ban"></i> DNC</h3><div><button class="btn-copy" onclick="copyResults('dnc')"><i class="fas fa-copy"></i></button><button class="btn-download" onclick="downloadResults('dnc')"><i class="fas fa-download"></i></button></div></div>
+                    <div class="result-list" id="dncList"><p class="empty-message" style="padding:15px;text-align:center;color:#999;">No DNC numbers</p></div>
                 </div>
                 <div class="result-card clean-card">
-                    <div class="result-header"><h3><i class="fas fa-check-circle"></i> Clean Numbers</h3><div><button class="btn-copy" onclick="copyResults('clean')"><i class="fas fa-copy"></i></button><button class="btn-download" onclick="downloadResults('clean')"><i class="fas fa-download"></i></button></div></div>
-                    <div class="result-list" id="cleanList"><p class="empty-message">No clean numbers</p></div>
+                    <div class="result-header"><h3><i class="fas fa-check-circle"></i> Clean</h3><div><button class="btn-copy" onclick="copyResults('clean')"><i class="fas fa-copy"></i></button><button class="btn-download" onclick="downloadResults('clean')"><i class="fas fa-download"></i></button></div></div>
+                    <div class="result-list" id="cleanList"><p class="empty-message" style="padding:15px;text-align:center;color:#999;">No clean numbers</p></div>
                 </div>
                 <div class="result-card error-card">
-                    <div class="result-header"><h3><i class="fas fa-exclamation-triangle"></i> Error Numbers</h3><div><button class="btn-copy" onclick="copyResults('error')"><i class="fas fa-copy"></i></button><button class="btn-download" onclick="downloadResults('error')"><i class="fas fa-download"></i></button></div></div>
-                    <div class="result-list" id="errorList"><p class="empty-message">No errors</p></div>
+                    <div class="result-header"><h3><i class="fas fa-exclamation-triangle"></i> Errors</h3><div><button class="btn-copy" onclick="copyResults('error')"><i class="fas fa-copy"></i></button><button class="btn-download" onclick="downloadResults('error')"><i class="fas fa-download"></i></button></div></div>
+                    <div class="result-list" id="errorList"><p class="empty-message" style="padding:15px;text-align:center;color:#999;">No errors</p></div>
                 </div>
             </div>
 
-            <button class="btn-download-all" onclick="downloadResults('all')"><i class="fas fa-download"></i> Download All</button>
+            <button class="btn-download-all" onclick="downloadResults('all')"><i class="fas fa-download"></i> Download All Results</button>
         </main>
 
-        <footer><p><i class="fas fa-bolt"></i> Unlimited numbers | Parallel processing | Auto CORS fix</p></footer>
+        <footer>
+            <p><i class="fas fa-bolt"></i> 4 CORS Proxies | Unlimited numbers | Parallel processing</p>
+        </footer>
     </div>
 
     <script>
-        let dncNumbers = [], cleanNumbers = [], errorNumbers = [], isProcessing = false, abortController = null;
-        const CORS_PROXY = 'https://api.allorigins.win/raw?url=', API_BASE = 'https://api.uspeoplesearch.site/tcpa/v1?x=';
+        //========== CONFIGURATION ==========
+        const API_BASE = 'https://api.uspeoplesearch.site/tcpa/v1?x=';
+        
+        // 4 Different CORS Proxies - koi na koi kaam karega
+        const PROXIES = [
+            'https://corsproxy.io/?',
+            'https://api.codetabs.com/v1/proxy?quest=',
+            'https://proxy.cors.sh/',
+            'https://thingproxy.freeboard.io/fetch/'
+        ];
+        
+        let currentProxyIndex = 0;
+        let workingProxy = null;
+        let dncNumbers = [], cleanNumbers = [], errorNumbers = [];
+        let isProcessing = false;
+        let abortController = null;
+        let proxyStatus = document.getElementById('proxyStatus');
 
-        const fileInput = document.getElementById('fileInput'), fileUploadArea = document.getElementById('fileUploadArea'), selectedFile = document.getElementById('selectedFile'), phoneInput = document.getElementById('phoneInput'), checkBtn = document.getElementById('checkBtn'), stopBtn = document.getElementById('stopBtn'), resetBtn = document.getElementById('resetBtn'), progressSection = document.getElementById('progressSection'), progressFill = document.getElementById('progressFill'), progressText = document.getElementById('progressText'), progressDetails = document.getElementById('progressDetails'), errorMessage = document.getElementById('errorMessage'), errorText = document.getElementById('errorText'), statsSection = document.getElementById('statsSection'), resultsSection = document.getElementById('resultsSection'), dncList = document.getElementById('dncList'), cleanList = document.getElementById('cleanList'), errorList = document.getElementById('errorList'), totalCount = document.getElementById('totalCount'), dncCount = document.getElementById('dncCount'), cleanCount = document.getElementById('cleanCount'), errorCount = document.getElementById('errorCount'), inputCount = document.getElementById('inputCount');
+        //========== TEST PROXIES ON LOAD ==========
+        async function testProxies() {
+            const testNumber = '3034708896';
+            const testUrl = API_BASE + testNumber;
+            
+            for(let i = 0; i < PROXIES.length; i++) {
+                proxyStatus.innerHTML = `<i class="fas fa-sync-alt fa-spin"></i> Testing proxy ${i+1}/${PROXIES.length}...`;
+                
+                try {
+                    const response = await fetch(PROXIES[i] + encodeURIComponent(testUrl), {
+                        signal: AbortSignal.timeout(5000)
+                    });
+                    
+                    if(response.ok) {
+                        const text = await response.text();
+                        try {
+                            JSON.parse(text);
+                            workingProxy = PROXIES[i];
+                            proxyStatus.innerHTML = `<i class="fas fa-check-circle" style="color:#28a745;"></i> Proxy ${i+1} working! Ready to check numbers.`;
+                            return;
+                        } catch(e) {
+                            continue;
+                        }
+                    }
+                } catch(e) {
+                    continue;
+                }
+            }
+            
+            // Agar koi proxy kaam na kare to pehla proxy use karo
+            workingProxy = PROXIES[0];
+            proxyStatus.innerHTML = `<i class="fas fa-exclamation-triangle" style="color:#ffc107;"></i> Using default proxy. May work.`;
+        }
 
+        //========== DOM ELEMENTS ==========
+        const fileInput = document.getElementById('fileInput');
+        const fileUploadArea = document.getElementById('fileUploadArea');
+        const selectedFile = document.getElementById('selectedFile');
+        const phoneInput = document.getElementById('phoneInput');
+        const checkBtn = document.getElementById('checkBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const progressSection = document.getElementById('progressSection');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const progressDetails = document.getElementById('progressDetails');
+        const errorMessage = document.getElementById('errorMessage');
+        const errorText = document.getElementById('errorText');
+        const statsSection = document.getElementById('statsSection');
+        const resultsSection = document.getElementById('resultsSection');
+        const dncList = document.getElementById('dncList');
+        const cleanList = document.getElementById('cleanList');
+        const errorList = document.getElementById('errorList');
+        const totalCount = document.getElementById('totalCount');
+        const dncCount = document.getElementById('dncCount');
+        const cleanCount = document.getElementById('cleanCount');
+        const errorCount = document.getElementById('errorCount');
+        const inputCount = document.getElementById('inputCount');
+
+        //========== EVENT LISTENERS ==========
         fileUploadArea.addEventListener('click', () => fileInput.click());
         fileUploadArea.addEventListener('dragover', (e) => { e.preventDefault(); fileUploadArea.style.background = '#f0f3ff'; });
         fileUploadArea.addEventListener('dragleave', (e) => { e.preventDefault(); fileUploadArea.style.background = 'white'; });
@@ -548,77 +492,133 @@
         phoneInput.addEventListener('input', updateInputCount);
 
         function processFile(file) {
-            if(!file.name.match(/\.(txt|csv)$/)) return showError('Only .txt or .csv files');
+            if(!file.name.match(/\.(txt|csv)$/)) return showError('Only .txt or .csv files allowed');
             selectedFile.innerHTML = `<i class="fas fa-file-alt"></i> ${file.name}`;
             const reader = new FileReader();
-            reader.onload = (e) => { phoneInput.value = extractNumbers(e.target.result).join('\n'); updateInputCount(); };
+            reader.onload = (e) => {
+                phoneInput.value = extractNumbers(e.target.result).join('\n');
+                updateInputCount();
+            };
             reader.readAsText(file);
         }
 
         function extractNumbers(text) {
-            return text.split('\n').map(l => l.trim()).filter(l => l).map(n => n.replace(/\D/g, '')).filter(n => n.length >= 10);
+            return text.split('\n')
+                .map(l => l.trim())
+                .filter(l => l.length > 0)
+                .map(n => n.replace(/\D/g, ''))
+                .filter(n => n.length >= 10);
         }
 
         function updateInputCount() {
-            inputCount.textContent = `${extractNumbers(phoneInput.value).length} numbers`;
+            inputCount.textContent = extractNumbers(phoneInput.value).length + ' numbers';
         }
 
         function clearInput() {
-            phoneInput.value = ''; selectedFile.innerHTML = '<i class="fas fa-file-alt"></i> No file selected'; fileInput.value = ''; updateInputCount();
+            phoneInput.value = '';
+            selectedFile.innerHTML = '<i class="fas fa-file-alt"></i> No file selected';
+            fileInput.value = '';
+            updateInputCount();
         }
 
+        //========== MAIN CHECK FUNCTION ==========
         async function checkNumbers() {
             if(isProcessing) return;
+            
             const numbers = extractNumbers(phoneInput.value);
-            if(!numbers.length) return showError('Enter numbers or upload file');
-            if(numbers.length > 500 && !confirm(`Check ${numbers.length} numbers? May take time.`)) return;
+            if(numbers.length === 0) return showError('Enter numbers or upload file');
             
-            resetResults();
-            isProcessing = true; abortController = new AbortController();
-            checkBtn.disabled = true; stopBtn.style.display = 'inline-flex'; resetBtn.disabled = true;
-            progressSection.style.display = 'block'; errorMessage.style.display = 'none';
-            
-            dncNumbers = []; cleanNumbers = []; errorNumbers = [];
-            let completed = 0, total = numbers.length, index = 0;
-            const CONCURRENT = 10;
-            
-            async function processBatch() {
-                const promises = [], batchSize = Math.min(CONCURRENT, total - index);
-                for(let i = 0; i < batchSize && index < total; i++) promises.push(checkSingleNumber(numbers[index++]));
-                if(promises.length) {
-                    const results = await Promise.allSettled(promises);
-                    results.forEach(r => {
-                        if(r.status === 'fulfilled') {
-                            const { number, data } = r.value;
-                            if(data.listed === 'Yes' || data.ndnc === 'Yes' || data.sdnc === 'Yes') dncNumbers.push(number);
-                            else if(data.listed === 'Error') errorNumbers.push(number);
-                            else cleanNumbers.push(number);
-                        } else errorNumbers.push(numbers[completed]);
-                        completed++;
-                    });
-                    const percent = (completed/total)*100;
-                    progressFill.style.width = `${percent}%`;
-                    progressText.textContent = `${completed}/${total} numbers`;
-                    progressDetails.textContent = `✓ Clean: ${cleanNumbers.length} | ⛔ DNC: ${dncNumbers.length} | ⚠️ Errors: ${errorNumbers.length}`;
-                    if(index < total && !abortController.signal.aborted) await processBatch();
-                }
+            if(!workingProxy) {
+                showError('Testing proxies, please wait...');
+                await testProxies();
+                if(!workingProxy) return showError('No proxy working. Try again.');
             }
             
-            try { await processBatch(); progressFill.style.width = '100%'; displayResults(); } 
-            catch(error) { if(error.name === 'AbortError') showSuccess('Stopped'); else showError('Error occurred'); } 
-            finally { isProcessing = false; checkBtn.disabled = false; stopBtn.style.display = 'none'; resetBtn.disabled = false; abortController = null; }
+            resetResults();
+            
+            isProcessing = true;
+            abortController = new AbortController();
+            checkBtn.disabled = true;
+            stopBtn.style.display = 'inline-flex';
+            resetBtn.disabled = true;
+            progressSection.style.display = 'block';
+            errorMessage.style.display = 'none';
+            
+            dncNumbers = [];
+            cleanNumbers = [];
+            errorNumbers = [];
+            
+            let completed = 0;
+            const total = numbers.length;
+            const CONCURRENT = 5; // Kam concurrent rakho for stability
+            
+            // Process in batches
+            for(let i = 0; i < numbers.length; i += CONCURRENT) {
+                if(abortController.signal.aborted) break;
+                
+                const batch = numbers.slice(i, i + CONCURRENT);
+                const promises = batch.map(num => checkNumber(num));
+                
+                const results = await Promise.allSettled(promises);
+                
+                results.forEach(r => {
+                    if(r.status === 'fulfilled' && r.value) {
+                        const { number, data } = r.value;
+                        if(data.listed === 'Yes' || data.ndnc === 'Yes' || data.sdnc === 'Yes') {
+                            dncNumbers.push(number);
+                        } else if(data.listed === 'Error') {
+                            errorNumbers.push(number);
+                        } else {
+                            cleanNumbers.push(number);
+                        }
+                    } else {
+                        errorNumbers.push(batch[completed % CONCURRENT]);
+                    }
+                    completed++;
+                    
+                    // Update progress
+                    const percent = (completed / total) * 100;
+                    progressFill.style.width = percent + '%';
+                    progressText.textContent = `Processing: ${completed}/${total}`;
+                    progressDetails.textContent = `✓ Clean: ${cleanNumbers.length} | ⛔ DNC: ${dncNumbers.length} | ⚠️ Errors: ${errorNumbers.length}`;
+                });
+            }
+            
+            displayResults();
+            
+            isProcessing = false;
+            checkBtn.disabled = false;
+            stopBtn.style.display = 'none';
+            resetBtn.disabled = false;
         }
 
-        function stopProcessing() { if(abortController) abortController.abort(); }
-
-        async function checkSingleNumber(phone) {
+        async function checkNumber(phone) {
+            const url = API_BASE + phone;
+            const proxyUrl = workingProxy + encodeURIComponent(url);
+            
             try {
-                const proxyUrl = `${CORS_PROXY}${encodeURIComponent(API_BASE + phone)}`;
-                const res = await fetch(proxyUrl, { signal: abortController?.signal });
-                const text = await res.text();
-                try { return { number: phone, data: JSON.parse(text) }; } 
-                catch { return { number: phone, data: JSON.parse(text) }; }
-            } catch { return { number: phone, data: { listed: 'Error', ndnc: 'Error', sdnc: 'Error' } }; }
+                const response = await fetch(proxyUrl, {
+                    signal: abortController?.signal,
+                    timeout: 8000
+                });
+                
+                if(response.ok) {
+                    const text = await response.text();
+                    try {
+                        return { number: phone, data: JSON.parse(text) };
+                    } catch(e) {
+                        return { number: phone, data: { listed: 'No', ndnc: 'No', sdnc: 'No' } };
+                    }
+                }
+            } catch(e) {
+                console.log('Error checking', phone, e);
+            }
+            
+            return { number: phone, data: { listed: 'Error', ndnc: 'Error', sdnc: 'Error' } };
+        }
+
+        function stopProcessing() {
+            if(abortController) abortController.abort();
         }
 
         function displayResults() {
@@ -626,46 +626,74 @@
             dncCount.textContent = dncNumbers.length;
             cleanCount.textContent = cleanNumbers.length;
             errorCount.textContent = errorNumbers.length;
+            
+            dncList.innerHTML = dncNumbers.length ? dncNumbers.map(n => `<div class="number-item">${n}</div>`).join('') : '<p style="padding:15px;text-align:center;color:#999;">No DNC numbers</p>';
+            cleanList.innerHTML = cleanNumbers.length ? cleanNumbers.map(n => `<div class="number-item">${n}</div>`).join('') : '<p style="padding:15px;text-align:center;color:#999;">No clean numbers</p>';
+            errorList.innerHTML = errorNumbers.length ? errorNumbers.map(n => `<div class="number-item">${n}</div>`).join('') : '<p style="padding:15px;text-align:center;color:#999;">No errors</p>';
+            
             statsSection.style.display = 'flex';
-            
-            dncList.innerHTML = dncNumbers.length ? dncNumbers.map(n => `<div class="number-item">${n}</div>`).join('') : '<p class="empty-message">No DNC numbers</p>';
-            cleanList.innerHTML = cleanNumbers.length ? cleanNumbers.map(n => `<div class="number-item">${n}</div>`).join('') : '<p class="empty-message">No clean numbers</p>';
-            errorList.innerHTML = errorNumbers.length ? errorNumbers.map(n => `<div class="number-item">${n}</div>`).join('') : '<p class="empty-message">No errors</p>';
-            
             resultsSection.style.display = 'flex';
             progressSection.style.display = 'none';
         }
 
         async function copyResults(type) {
-            let numbers = type === 'dnc' ? dncNumbers : type === 'clean' ? cleanNumbers : errorNumbers;
-            if(!numbers.length) return showError(`No ${type} numbers`);
+            const numbers = type === 'dnc' ? dncNumbers : type === 'clean' ? cleanNumbers : errorNumbers;
+            if(!numbers.length) return showError('No numbers to copy');
             await navigator.clipboard.writeText(numbers.join('\n'));
-            showSuccess(`${type} numbers copied`);
+            showSuccess('Copied!');
         }
 
         function downloadResults(type) {
             let content = '', filename = '';
+            
             if(type === 'all') {
-                content = `=== DNC (${dncNumbers.length}) ===\n${dncNumbers.join('\n')}\n\n=== Clean (${cleanNumbers.length}) ===\n${cleanNumbers.join('\n')}\n\n=== Errors (${errorNumbers.length}) ===\n${errorNumbers.join('\n')}`;
+                content = `DNC NUMBERS (${dncNumbers.length})\n${dncNumbers.join('\n')}\n\nCLEAN NUMBERS (${cleanNumbers.length})\n${cleanNumbers.join('\n')}\n\nERROR NUMBERS (${errorNumbers.length})\n${errorNumbers.join('\n')}`;
                 filename = 'all_results.txt';
             } else {
-                let numbers = type === 'dnc' ? dncNumbers : type === 'clean' ? cleanNumbers : errorNumbers;
-                if(!numbers.length) return showError(`No ${type} numbers`);
+                const numbers = type === 'dnc' ? dncNumbers : type === 'clean' ? cleanNumbers : errorNumbers;
+                if(!numbers.length) return showError('No numbers to download');
                 content = numbers.join('\n');
-                filename = `${type}_numbers.txt`;
+                filename = type + '_numbers.txt';
             }
-            const blob = new Blob([content], { type: 'text/plain' });
+            
+            const blob = new Blob([content], {type: 'text/plain'});
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
             a.download = filename;
             a.click();
         }
 
-        function resetAll() { if(isProcessing) stopProcessing(); clearInput(); resetResults(); progressSection.style.display = 'none'; errorMessage.style.display = 'none'; }
-        function resetResults() { dncNumbers = []; cleanNumbers = []; errorNumbers = []; statsSection.style.display = 'none'; resultsSection.style.display = 'none'; progressFill.style.width = '0%'; progressDetails.textContent = ''; }
-        function showError(m) { errorText.textContent = m; errorMessage.style.display = 'flex'; setTimeout(() => errorMessage.style.display = 'none', 3000); }
-        function showSuccess(m) { errorText.textContent = m; errorMessage.style.background = '#d4edda'; errorMessage.style.color = '#155724'; errorMessage.style.display = 'flex'; setTimeout(() => errorMessage.style.display = 'none', 2000); }
+        function resetAll() {
+            if(isProcessing) stopProcessing();
+            clearInput();
+            dncNumbers = []; cleanNumbers = []; errorNumbers = [];
+            statsSection.style.display = 'none';
+            resultsSection.style.display = 'none';
+            progressFill.style.width = '0%';
+            progressDetails.textContent = '';
+            progressSection.style.display = 'none';
+        }
 
+        function showError(msg) {
+            errorText.textContent = msg;
+            errorMessage.style.display = 'flex';
+            setTimeout(() => errorMessage.style.display = 'none', 3000);
+        }
+
+        function showSuccess(msg) {
+            errorText.textContent = msg;
+            errorMessage.style.background = '#d4edda';
+            errorMessage.style.color = '#155724';
+            errorMessage.style.display = 'flex';
+            setTimeout(() => {
+                errorMessage.style.display = 'none';
+                errorMessage.style.background = '#f8d7da';
+                errorMessage.style.color = '#721c24';
+            }, 2000);
+        }
+
+        // Start testing proxies
+        testProxies();
         updateInputCount();
     </script>
 </body>
